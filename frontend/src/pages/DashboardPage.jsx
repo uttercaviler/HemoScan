@@ -10,10 +10,12 @@ import {
     Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
     AreaChart, Area
 } from 'recharts'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const API_BASE = '/api'
 
 function DashboardPage() {
+    const { t } = useLanguage()
     const [stats, setStats] = useState(null)
     const [modelInfo, setModelInfo] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -59,18 +61,18 @@ function DashboardPage() {
                 <div className="page-header">
                     <h1 className="page-title">
                         <BarChart3 size={28} style={{ display: 'inline', marginRight: '12px', color: 'var(--primary)' }} />
-                        Dashboard
+                        {t('dashboard')}
                     </h1>
                 </div>
                 <div className="card" style={{ textAlign: 'center', padding: '60px' }}>
                     <Activity size={48} style={{ color: 'var(--text-muted)', marginBottom: '16px' }} />
-                    <h3 style={{ color: 'var(--text-secondary)', marginBottom: '12px' }}>Backend Not Available</h3>
+                    <h3 style={{ color: 'var(--text-secondary)', marginBottom: '12px' }}>{t('backendNotAvailable')}</h3>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '400px', margin: '0 auto 24px' }}>
                         {error}
                     </p>
                     <button className="btn btn-primary" onClick={fetchData}>
                         <Zap size={16} />
-                        Retry Connection
+                        {t('retryConnection')}
                     </button>
                 </div>
             </div>
@@ -115,9 +117,9 @@ function DashboardPage() {
             <div className="page-header">
                 <h1 className="page-title">
                     <BarChart3 size={28} style={{ display: 'inline', marginRight: '12px', color: 'var(--primary)' }} />
-                    Analytics Dashboard
+                    {t('analyticsDashboard')}
                 </h1>
-                <p className="page-subtitle">Model performance metrics and system analytics</p>
+                <p className="page-subtitle">{t('dashboardSubtitle')}</p>
             </div>
 
             {/* Stat Cards */}
@@ -135,7 +137,7 @@ function DashboardPage() {
                     <div className="stat-card-value" style={{ color: '#22c55e' }}>
                         {stats?.model_accuracy?.toFixed(1)}%
                     </div>
-                    <div className="stat-card-label">Model Accuracy</div>
+                    <div className="stat-card-label">{t('accuracy')}</div>
                 </motion.div>
 
                 <motion.div
@@ -151,7 +153,7 @@ function DashboardPage() {
                     <div className="stat-card-value" style={{ color: '#06b6d4' }}>
                         {stats?.training_samples?.toLocaleString()}
                     </div>
-                    <div className="stat-card-label">Training Samples</div>
+                    <div className="stat-card-label">{t('trainingSamples')}</div>
                 </motion.div>
 
                 <motion.div
@@ -167,7 +169,7 @@ function DashboardPage() {
                     <div className="stat-card-value" style={{ color: '#8b5cf6' }}>
                         {stats?.total_features}
                     </div>
-                    <div className="stat-card-label">Input Features</div>
+                    <div className="stat-card-label">{t('inputFeatures')}</div>
                 </motion.div>
 
                 <motion.div
@@ -183,7 +185,7 @@ function DashboardPage() {
                     <div className="stat-card-value" style={{ color: '#dc2626' }}>
                         {modelInfo?.model_name || 'Ensemble'}
                     </div>
-                    <div className="stat-card-label">Selected Model</div>
+                    <div className="stat-card-label">{t('selectedModel')}</div>
                 </motion.div>
             </div>
 
@@ -198,8 +200,8 @@ function DashboardPage() {
                 >
                     <div className="card-header">
                         <div>
-                            <h3 className="card-title">Feature Importance</h3>
-                            <p className="card-subtitle">Top 10 most influential features</p>
+                            <h3 className="card-title">{t('featureImportance')}</h3>
+                            <p className="card-subtitle">{t('topFeatures')}</p>
                         </div>
                     </div>
                     <ResponsiveContainer width="100%" height={350}>
@@ -251,8 +253,8 @@ function DashboardPage() {
                 >
                     <div className="card-header">
                         <div>
-                            <h3 className="card-title">Severity Distribution</h3>
-                            <p className="card-subtitle">Classification breakdown in dataset</p>
+                            <h3 className="card-title">{t('severityDistribution')}</h3>
+                            <p className="card-subtitle">{t('classificationBreakdown')}</p>
                         </div>
                     </div>
                     <ResponsiveContainer width="100%" height={350}>
@@ -301,8 +303,8 @@ function DashboardPage() {
                 >
                     <div className="card-header">
                         <div>
-                            <h3 className="card-title">Feature Radar</h3>
-                            <p className="card-subtitle">Multi-dimensional feature contribution</p>
+                            <h3 className="card-title">{t('featureRadar')}</h3>
+                            <p className="card-subtitle">{t('multiDimensional')}</p>
                         </div>
                     </div>
                     <ResponsiveContainer width="100%" height={350}>
@@ -345,8 +347,8 @@ function DashboardPage() {
                 >
                     <div className="card-header">
                         <div>
-                            <h3 className="card-title">Model Performance</h3>
-                            <p className="card-subtitle">Key evaluation metrics</p>
+                            <h3 className="card-title">{t('modelPerformance')}</h3>
+                            <p className="card-subtitle">{t('keyMetrics')}</p>
                         </div>
                     </div>
                     <ResponsiveContainer width="100%" height={350}>
@@ -400,9 +402,9 @@ function DashboardPage() {
                         <div>
                             <h3 className="card-title">
                                 <Brain size={18} style={{ display: 'inline', marginRight: '8px' }} />
-                                Model Configuration
+                                {t('modelConfiguration')}
                             </h3>
-                            <p className="card-subtitle">Technical details of the trained model</p>
+                            <p className="card-subtitle">{t('technicalDetails')}</p>
                         </div>
                     </div>
                     <div className="tech-stack-grid">

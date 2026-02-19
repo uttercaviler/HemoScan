@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { LanguageProvider } from './i18n/LanguageContext'
 import Sidebar from './components/Sidebar'
 import LandingPage from './pages/LandingPage'
 import ScreeningPage from './pages/ScreeningPage'
@@ -28,21 +29,23 @@ function AppLayout({ children }) {
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/screening" element={
-                    <AppLayout><ScreeningPage /></AppLayout>
-                } />
-                <Route path="/dashboard" element={
-                    <AppLayout><DashboardPage /></AppLayout>
-                } />
-                <Route path="/about" element={
-                    <AppLayout><AboutPage /></AppLayout>
-                } />
-                <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-        </BrowserRouter>
+        <LanguageProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/screening" element={
+                        <AppLayout><ScreeningPage /></AppLayout>
+                    } />
+                    <Route path="/dashboard" element={
+                        <AppLayout><DashboardPage /></AppLayout>
+                    } />
+                    <Route path="/about" element={
+                        <AppLayout><AboutPage /></AppLayout>
+                    } />
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </BrowserRouter>
+        </LanguageProvider>
     )
 }
 

@@ -5,50 +5,52 @@ import {
     Heart, Activity, Shield, Brain, Stethoscope, BarChart3,
     Zap, Users, ArrowRight, CheckCircle2
 } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 function LandingPage() {
     const navigate = useNavigate()
+    const { t } = useLanguage()
 
     const features = [
         {
             icon: <Brain size={28} />,
-            title: 'AI-Powered Detection',
-            description: 'Advanced machine learning algorithms analyze patient data for accurate anemia severity classification.',
+            title: t('aiDetection'),
+            description: t('aiDetectionDesc'),
             color: '#ef4444',
             bgColor: 'rgba(239, 68, 68, 0.1)',
         },
         {
             icon: <Activity size={28} />,
-            title: 'Risk Scoring Engine',
-            description: 'Comprehensive risk assessment with personalized scores based on 20+ patient parameters.',
+            title: t('riskScoring'),
+            description: t('riskScoringDesc'),
             color: '#f97316',
             bgColor: 'rgba(249, 115, 22, 0.1)',
         },
         {
             icon: <Shield size={28} />,
-            title: 'Preventive Alerts',
-            description: 'Early warning system that flags critical conditions before they become life-threatening.',
+            title: t('preventiveAlerts'),
+            description: t('preventiveAlertsDesc'),
             color: '#eab308',
             bgColor: 'rgba(234, 179, 8, 0.1)',
         },
         {
             icon: <Stethoscope size={28} />,
-            title: 'Clinical Dashboard',
-            description: 'Professional dashboard for healthcare providers with comprehensive patient analytics.',
+            title: t('clinicalDashboard'),
+            description: t('clinicalDashboardDesc'),
             color: '#22c55e',
             bgColor: 'rgba(34, 197, 94, 0.1)',
         },
         {
             icon: <Zap size={28} />,
-            title: 'Instant Results',
-            description: 'Get classification results in seconds with personalized recommendations and referral alerts.',
+            title: t('instantResults'),
+            description: t('instantResultsDesc'),
             color: '#06b6d4',
             bgColor: 'rgba(6, 182, 212, 0.1)',
         },
         {
             icon: <Users size={28} />,
-            title: 'Accessible Screening',
-            description: 'Designed for rural and low-resource healthcare settings. Works without expensive lab infrastructure.',
+            title: t('accessibleScreening'),
+            description: t('accessibleScreeningDesc'),
             color: '#8b5cf6',
             bgColor: 'rgba(139, 92, 246, 0.1)',
         },
@@ -90,18 +92,17 @@ function LandingPage() {
                         transition={{ delay: 0.2 }}
                     >
                         <Heart size={14} />
-                        AI-Powered Healthcare Solution
+                        {t('heroBadge')}
                     </motion.div>
 
                     <h1 className="hero-title">
-                        <span className="gradient-text">HemoScan AI</span>
+                        <span className="gradient-text">{t('heroTitle1')}</span>
                         <br />
-                        Anemia Detection &<br />Risk Analysis
+                        {t('heroTitle2')}<br />{t('heroTitle3')}
                     </h1>
 
                     <p className="hero-description">
-                        Early screening, risk prediction, and preventive intervention using artificial intelligence.
-                        Detect anemia severity instantly with personalized recommendations and clinical-grade risk assessments.
+                        {t('heroDescription')}
                     </p>
 
                     <div className="hero-actions">
@@ -110,7 +111,7 @@ function LandingPage() {
                             onClick={() => navigate('/screening')}
                             id="hero-start-screening"
                         >
-                            Start Screening
+                            {t('startScreening')}
                             <ArrowRight size={18} />
                         </button>
                         <button
@@ -119,7 +120,7 @@ function LandingPage() {
                             id="hero-view-dashboard"
                         >
                             <BarChart3 size={18} />
-                            View Dashboard
+                            {t('viewDashboard')}
                         </button>
                     </div>
 
@@ -131,19 +132,19 @@ function LandingPage() {
                     >
                         <div className="hero-stat">
                             <div className="hero-stat-value" style={{ color: 'var(--severity-normal)' }}>95%+</div>
-                            <div className="hero-stat-label">Model Accuracy</div>
+                            <div className="hero-stat-label">{t('modelAccuracy')}</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-value" style={{ color: 'var(--accent-cyan)' }}>20+</div>
-                            <div className="hero-stat-label">Health Parameters</div>
+                            <div className="hero-stat-label">{t('healthParameters')}</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-value" style={{ color: 'var(--accent-orange)' }}>4</div>
-                            <div className="hero-stat-label">Severity Classes</div>
+                            <div className="hero-stat-label">{t('severityClasses')}</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-value" style={{ color: 'var(--accent-violet)' }}>&lt;2s</div>
-                            <div className="hero-stat-label">Analysis Time</div>
+                            <div className="hero-stat-label">{t('analysisTime')}</div>
                         </div>
                     </motion.div>
                 </motion.div>
@@ -157,7 +158,7 @@ function LandingPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    Powered by <span style={{ color: 'var(--primary)' }}>Advanced AI</span>
+                    {t('poweredByAI')}
                 </motion.h2>
 
                 <motion.div
@@ -194,7 +195,7 @@ function LandingPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    How It <span style={{ color: 'var(--primary)' }}>Works</span>
+                    {t('howItWorks')}
                 </motion.h2>
 
                 <motion.div
@@ -206,10 +207,10 @@ function LandingPage() {
                     viewport={{ once: true }}
                 >
                     {[
-                        { step: '01', title: 'Input Patient Data', desc: 'Enter hemoglobin levels, symptoms, medical history, and demographic information.' },
-                        { step: '02', title: 'AI Analysis', desc: 'Our ML engine processes 20+ parameters using XGBoost & Random Forest models.' },
-                        { step: '03', title: 'Risk Assessment', desc: 'Receive instant severity classification with confidence scores.' },
-                        { step: '04', title: 'Get Recommendations', desc: 'Personalized treatment suggestions, alerts, and follow-up guidance.' },
+                        { step: '01', title: t('step1Title'), desc: t('step1Desc') },
+                        { step: '02', title: t('step2Title'), desc: t('step2Desc') },
+                        { step: '03', title: t('step3Title'), desc: t('step3Desc') },
+                        { step: '04', title: t('step4Title'), desc: t('step4Desc') },
                     ].map((item, index) => (
                         <motion.div
                             key={index}
@@ -251,17 +252,17 @@ function LandingPage() {
                 >
                     <Heart size={48} color="var(--primary)" style={{ marginBottom: '20px' }} />
                     <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, marginBottom: '16px' }}>
-                        Ready to Screen?
+                        {t('readyToScreen')}
                     </h2>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '28px', lineHeight: '1.7' }}>
-                        Start using HemoScan AI for early anemia detection. Quick, accurate, and accessible healthcare screening at your fingertips.
+                        {t('ctaDescription')}
                     </p>
                     <button
                         className="btn btn-primary btn-lg"
                         onClick={() => navigate('/screening')}
                         id="cta-start-screening"
                     >
-                        Begin Patient Screening
+                        {t('beginScreening')}
                         <ArrowRight size={18} />
                     </button>
                 </motion.div>
@@ -277,10 +278,10 @@ function LandingPage() {
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
                     <Heart size={16} color="var(--primary)" />
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--text-secondary)' }}>HemoScan AI</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--text-secondary)' }}>{t('appName')} {t('appTagline')}</span>
                 </div>
-                <p>Built by Team Plasma • Aligned with SDG 3: Good Health & Well-being</p>
-                <p style={{ marginTop: '4px' }}>© 2026 HemoScan AI. For screening purposes only.</p>
+                <p>{t('footerTeam')}</p>
+                <p style={{ marginTop: '4px' }}>{t('footerDisclaimer')}</p>
             </footer>
         </div>
     )
