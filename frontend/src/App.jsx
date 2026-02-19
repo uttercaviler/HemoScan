@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar'
 import LandingPage from './pages/LandingPage'
 import ScreeningPage from './pages/ScreeningPage'
 import DashboardPage from './pages/DashboardPage'
+import DietPage from './pages/DietPage'
 import AboutPage from './pages/AboutPage'
 
 function AppLayout({ children }) {
@@ -38,6 +39,9 @@ function App() {
                     } />
                     <Route path="/dashboard" element={
                         <AppLayout><DashboardPage /></AppLayout>
+                    } />
+                    <Route path="/diet" element={
+                        <AppLayout><DietPage /></AppLayout>
                     } />
                     <Route path="/about" element={
                         <AppLayout><AboutPage /></AppLayout>

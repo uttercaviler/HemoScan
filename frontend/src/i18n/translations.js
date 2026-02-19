@@ -179,6 +179,11 @@ const translations = {
 
         // Language
         language: 'Language',
+
+        // Diet
+        dietRecommendations: 'Diet Plan',
+        viewDietDesc: 'Get personalized, region-specific food suggestions based on your screening results',
+        viewDietPlan: 'View Diet Plan →',
     },
 
     hi: {
@@ -328,6 +333,9 @@ const translations = {
         severityModerate: 'मध्यम एनीमिया',
         severitySevere: 'गंभीर एनीमिया',
         language: 'भाषा',
+        dietRecommendations: 'आहार योजना',
+        viewDietDesc: 'अपनी जांच के परिणामों पर आधारित व्यक्तिगत, क्षेत्रीय खाद्य सुझाव प्राप्त करें',
+        viewDietPlan: 'आहार योजना देखें →',
     },
 
     te: {
@@ -477,6 +485,9 @@ const translations = {
         severityModerate: 'మధ్యస్థ రక్తహీనత',
         severitySevere: 'తీవ్ర రక్తహీనత',
         language: 'భాష',
+        dietRecommendations: 'ఆహార ప్లాన్',
+        viewDietDesc: 'మీ పరీక్ష ఫలితాల ఆధారంగా వ్యక్తిగత, ప్రాంతీయ ఆహార సూచనలు పొందండి',
+        viewDietPlan: 'ఆహార ప్లాన్ చూడండి →',
     },
 
     ta: {
@@ -626,6 +637,9 @@ const translations = {
         severityModerate: 'மிதமான இரத்தசோகை',
         severitySevere: 'கடுமையான இரத்தசோகை',
         language: 'மொழி',
+        dietRecommendations: 'உணவு திட்டம்',
+        viewDietDesc: 'உங்கள் பரிசோதனை முடிவுகளின் அடிப்படையில் தனிப்பயனாக்கப்பட்ட, பிராந்திய உணவு பரிந்துரைகளைப் பெறுங்கள்',
+        viewDietPlan: 'உணவு திட்டம் பார்க்க →',
     },
 }
 

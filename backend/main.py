@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from ml.predictor import HemoScanPredictor
+from diet_engine import get_diet_recommendations
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -80,6 +81,17 @@ class QuickScreenData(BaseModel):
     dizziness: int = Field(0, ge=0, le=1)
     diet_quality: int = Field(1, ge=0, le=2)
     pregnancy: int = Field(0, ge=0, le=1)
+
+
+class DietRequest(BaseModel):
+    """Request schema for diet recommendations."""
+    severity: str = Field(..., description="Anemia severity: Normal, Mild Anemia, Moderate Anemia, Severe Anemia")
+    hemoglobin: float = Field(12.0, ge=1, le=25)
+    iron_level: float = Field(80, ge=5, le=200)
+    ferritin: float = Field(100, ge=1, le=500)
+    gender: int = Field(0, ge=0, le=1, description="0=Female, 1=Male")
+    pregnancy: int = Field(0, ge=0, le=1)
+    language: str = Field("en", description="Language code: en, hi, te, ta")
 
 
 @app.get("/")
@@ -182,6 +194,40 @@ async def get_statistics():
         'severity_classes': 4,
         'feature_importance': model_data['feature_importance']
     }
+
+
+@app.post("/api/diet-recommendations")
+async def diet_recommendations(data: DietRequest):
+    """
+    Get personalized, localized diet recommendations based on screening results.
+    Returns region-specific food suggestions, meal plans, and absorption tips.
+    """
+    try:
+        # Detect deficiencies from blood values
+        deficiencies = []
+        if data.hemoglobin < (13.5 if data.gender == 1 else 12.0):
+            deficiencies.append("low_hemoglobin")
+        if data.iron_level < 60:
+            deficiencies.append("low_iron")
+        if data.ferritin < 20:
+            deficiencies.append("low_ferritin")
+
+        # If severity indicates anemia but no specific deficiencies detected,
+        # assume low iron/hemoglobin
+        if data.severity != "Normal" and not deficiencies:
+            deficiencies.append("low_hemoglobin")
+            deficiencies.append("low_iron")
+
+        result = get_diet_recommendations(
+            severity=data.severity,
+            deficiencies=deficiencies,
+            language=data.language,
+            gender=data.gender,
+            is_pregnant=data.pregnancy == 1,
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == '__main__':

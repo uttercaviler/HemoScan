@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { Activity, Home, Stethoscope, BarChart3, Info, Heart, Globe, ChevronDown } from 'lucide-react'
+import { Activity, Home, Stethoscope, BarChart3, Info, Heart, Globe, ChevronDown, UtensilsCrossed } from 'lucide-react'
 import { useLanguage, LANGUAGES } from '../i18n/LanguageContext'
 
 function Sidebar({ isOpen, onClose }) {
@@ -13,6 +13,7 @@ function Sidebar({ isOpen, onClose }) {
     const navItems = [
         { path: '/screening', icon: Stethoscope, label: t('patientScreening') },
         { path: '/dashboard', icon: BarChart3, label: t('dashboard') },
+        { path: '/diet', icon: UtensilsCrossed, label: t('dietRecommendations') },
         { path: '/about', icon: Info, label: t('about') },
     ]
 

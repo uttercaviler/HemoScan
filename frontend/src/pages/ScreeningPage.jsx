@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Stethoscope, Zap, Send, RotateCcw, AlertTriangle, CheckCircle,
     ChevronDown, ChevronUp, TrendingUp, Shield, Droplets, Activity,
-    Download
+    Download, UtensilsCrossed
 } from 'lucide-react'
 import { jsPDF } from 'jspdf'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -15,6 +15,7 @@ function ScreeningPage() {
     const [searchParams] = useSearchParams()
     const isQuickMode = searchParams.get('mode') === 'quick'
     const { t } = useLanguage()
+    const navigate = useNavigate()
 
     const [mode, setMode] = useState(isQuickMode ? 'quick' : 'full')
     const [loading, setLoading] = useState(false)
@@ -811,6 +812,44 @@ function ScreeningPage() {
                                 </div>
                             )}
                         </div>
+
+                        {/* Diet Recommendations CTA */}
+                        <motion.div
+                            className="card"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.2 }}
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(6, 182, 212, 0.08))',
+                                borderColor: 'rgba(34, 197, 94, 0.25)',
+                                textAlign: 'center', padding: '32px 24px', marginBottom: '24px',
+                            }}
+                        >
+                            <UtensilsCrossed size={32} style={{ color: 'var(--severity-normal)', marginBottom: '12px' }} />
+                            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: '8px' }}>
+                                {t('dietRecommendations') || 'Diet Recommendations'}
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '16px', maxWidth: '400px', margin: '0 auto 16px' }}>
+                                {t('viewDietDesc') || 'Get personalized, region-specific food suggestions based on your screening results'}
+                            </p>
+                            <button
+                                onClick={() => navigate('/diet', { state: { result, formData } })}
+                                style={{
+                                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                                    padding: '12px 28px', borderRadius: '10px', border: 'none',
+                                    background: 'linear-gradient(135deg, #22c55e, #06b6d4)',
+                                    color: '#fff', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer',
+                                    fontFamily: 'var(--font-body)',
+                                    transition: 'transform 0.2s, box-shadow 0.2s',
+                                    boxShadow: '0 4px 15px rgba(34, 197, 94, 0.3)',
+                                }}
+                                onMouseEnter={e => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 6px 20px rgba(34, 197, 94, 0.4)' }}
+                                onMouseLeave={e => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 4px 15px rgba(34, 197, 94, 0.3)' }}
+                            >
+                                <UtensilsCrossed size={18} />
+                                {t('viewDietPlan') || 'View Diet Plan →'}
+                            </button>
+                        </motion.div>
 
                         {/* Disclaimer */}
                         <div className="card" style={{ borderColor: 'rgba(234, 179, 8, 0.2)' }}>
